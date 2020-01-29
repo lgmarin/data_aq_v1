@@ -16,7 +16,7 @@ void setup() {
     digitalWrite(max6675_cs[i], HIGH);
   }
   SPI.begin();
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.print("Basic configuration initialized");
   Serial.println("\t");
 }
@@ -41,10 +41,23 @@ float max6675Read(int max6675_cs_pin){
   }
 }
 
-void loop() {
-  //Create a moving averages smooth function
+//Create a moving averages smooth function
+float movAverage(float value){
+
   const float mov_avg_alpha = 0.1;
-  static float mov_avgs[max6675_num] = {-100, -100};
+  static float mov_avg = -100;
+
+  if (mov_avg == -100)
+  {
+    mov_avg = value;
+  }
+
+  mov_avg = mov_avg_alpha * value + (1-mov_avg_alpha) * mov_avg;
+
+  return mov_avg;
+}
+
+void loop() {
 
   float value;
 
@@ -53,15 +66,8 @@ void loop() {
   for (int i = 0; i < max6675_num; i++)
   {
     value = max6675Read(max6675_cs[i]);
-
-    if (mov_avgs[i] == -100)
-    {
-      mov_avgs[i] = value;
-    }
-
-    mov_avgs[i] = mov_avg_alpha * value + (1-mov_avg_alpha) * mov_avgs[i];
     
-    Serial.print(round(mov_avgs[i]));
+    Serial.print(round(movAverage(value)));
     Serial.print(",");
   }
   Serial.println("\t");
