@@ -43,7 +43,6 @@ float max6675Read(int max6675_cs_pin){
 
 //Create a moving averages smooth function
 float movAverage(float value){
-
   const float mov_avg_alpha = 0.1;
   static float mov_avg = -100;
 
@@ -59,16 +58,18 @@ float movAverage(float value){
 
 void loop() {
 
-  float value;
+  float value[max6675_num];
 
-  delay(500); //default = 220
+  delay(250); //default = 220
 
   for (int i = 0; i < max6675_num; i++)
   {
-    value = max6675Read(max6675_cs[i]);
-    
-    Serial.print(round(movAverage(value)));
-    Serial.print(",");
+    value[i] = max6675Read(max6675_cs[i]);
+    //Serial.print(round(movAverage(value[i]))); remove for now
   }
+
+  Serial.print(value[0]); //Just print normal data
+  Serial.print(",");
+  Serial.print(value[1]); //Just print normal data
   Serial.println("\t");
 }
