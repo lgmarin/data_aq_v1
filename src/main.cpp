@@ -17,8 +17,8 @@ void setup() {
   }
   SPI.begin();
   Serial.begin(115200);
-  Serial.print("Basic configuration initialized");
-  Serial.println("\t");
+  // Serial.print("Basic configuration initialized");
+  // Serial.println("\t");
 }
 
 //Read data from the max6675 through SPI bus
@@ -70,6 +70,5 @@ void loop() {
 
   Serial.print(value[0]); //Just print normal data
   Serial.print(",");
-  Serial.print(value[1]); //Just print normal data
-  Serial.println("\t");
+  Serial.println(value[1]); //Just print normal data
 }
