@@ -3,7 +3,10 @@
 
 //Set the number of thermocouples and allocate the CS pins
 const byte max6675_num = 2;
-const int max6675_cs[max6675_num] = {9, 8};
+const int max6675_cs[max6675_num] = {4, 5}; //MAX675 pins: 4, 5, 6, 7, 8
+//Pinout, extra devices
+// Pin D9 (9) - push button
+// Pin A5 - DHT header (DATA) 
 
 //Define SPI settings
 SPISettings max6675_spi(1000000, MSBFIRST, SPI_MODE1);
