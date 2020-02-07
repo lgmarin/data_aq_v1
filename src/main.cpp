@@ -2,8 +2,8 @@
 #include <SPI.h>
 
 //Set the number of thermocouples and allocate the CS pins
-const byte max6675_num = 2;
-const int max6675_cs[max6675_num] = {4, 5}; //MAX675 pins: 4, 5, 6, 7, 8
+const byte max6675_num = 5;
+const int max6675_cs[max6675_num] = {4, 5, 6, 7, 8}; //MAX675 pins: 4, 5, 6, 7, 8
 //Pinout, extra devices
 // Pin D9 (9) - push button
 // Pin A5 - DHT header (DATA) 
@@ -73,5 +73,11 @@ void loop() {
 
   Serial.print(value[0]); //Just print normal data
   Serial.print(",");
-  Serial.println(value[1]); //Just print normal data
+  Serial.print(value[1]); //Just print normal data
+  Serial.print(",");
+  Serial.print(value[2]); //Just print normal data
+  Serial.print(",");
+  Serial.print(value[3]); //Just print normal data
+  Serial.print(",");
+  Serial.println(value[4]); //Just print normal data
 }
